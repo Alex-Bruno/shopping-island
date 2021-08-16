@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class PaymentTypeTest extends WebTestCase
 {
     private $baseUrl = 'http://localhost:8012';
+
+    /** @test */
     public function shouldRenderSuccess(): void
     {
         $client = static::createClient();
