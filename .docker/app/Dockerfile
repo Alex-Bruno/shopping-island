@@ -1,10 +1,7 @@
 FROM php:8.0-fpm
 
-# Set working directory
-WORKDIR /var/www/app
-
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     build-essential \
     libfontconfig1 libxrender1 \
     zlib1g-dev \
@@ -27,28 +24,25 @@ RUN apt-get update && apt-get install -y \
     wget \
     apt-utils
 
+# Set working directory
+WORKDIR /var/www/app/
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
 RUN docker-php-ext-install intl opcache pdo pdo_mysql mbstring zip exif pcntl bcmath gmp gd
+RUN pecl install apcu
+RUN docker-php-ext-enable apcu
+RUN docker-php-ext-configure zip
+RUN docker-php-ext-install zip
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=2.1.4
 
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
-
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www/app
-
-RUN chown www:www-data -R /var/www/app
-RUN chmod 755 -R /var/www/app
-RUN chmod g+s -R  /var/www/app
-
-# Change current user to www
-USER www
+#Install symfony
+RUN curl -sS https://get.symfony.com/cli/installer | bash
+RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000

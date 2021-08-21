@@ -11,9 +11,8 @@ services:
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
-    working_dir: /var/www/app
     volumes:
-      - ./:/var/www/app
+      - .:/var/www/app
       - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - net_shopping_island
@@ -24,9 +23,9 @@ services:
     ports:
       - 8012:80
     volumes:
-      - ./:/var/www/app/
+      - .:/var/www/app
       - ./.docker/nginx/conf.d:/etc/nginx/conf.d
-    working_dir: /var/www/app
+    working_dir: /var/www/app/
     networks:
       - net_shopping_island
 
