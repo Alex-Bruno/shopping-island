@@ -1,0 +1,7 @@
+paymentType:
+  form:
+    name: Name
+    discount: Discount
+    placeholder:
+      name: Enter the payment type name
+      discount: Enter discount for payment type

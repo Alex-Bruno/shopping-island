@@ -1,0 +1,7 @@
+paymentType:
+  form:
+    name: Nome
+    discount: Desconto
+    placeholder:
+      name: Digite o nome do tipo de pagamento
+      discount: Digite o desconto para o tipo de pagamento

@@ -20,7 +20,7 @@ class PaymentTypeRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return PaymentType[] Returns an array of PaymentType objects
+    //  * @return PaymentTypeType[] Returns an array of PaymentTypeType objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PaymentTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?PaymentType
+    public function findOneBySomeField($value): ?PaymentTypeType
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Interfaces\EntityInterface;
 use App\Repository\PaymentTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PaymentTypeRepository::class)
@@ -20,11 +21,14 @@ class PaymentType implements EntityInterface
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank
+     * @Assert\Type("float")
      */
     private $discount;
 
