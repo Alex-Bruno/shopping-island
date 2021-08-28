@@ -1,0 +1,3 @@
+paymentType:
+  unique:
+    name: This type of payment has already been registered!

@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Tipos de pagamento{% endblock %}
-{% block totalItems %}<span class="badge">{{ payments | length }}</span>{% endblock %}
+{% block totalItems %}<span class="badge badge-secondary">{{ payments | length }}</span>{% endblock %}
+
+{% block buttonTopRight %}
+    <a href="{{ path('payment_type_new') }}" class="btn btn-primary btn-round float-right">
+        <i class="fa fa-plus"></i> Adicionar
+    </a>
+{% endblock %}
 
 {% block body %}
     <div class="card">
@@ -18,8 +24,18 @@
                     {% for payment in payments %}
                         <tr>
                             <td>{{ payment.name }}</td>
-                            <td>{{ payment.discount }}</td>
-                            <td></td>
+                            <td>{{ payment.discount }}%</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Opções
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Editar</a>
+                                        <a class="dropdown-item" href="#">Deletar</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

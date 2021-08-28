@@ -29,7 +29,7 @@
             {% include 'layout/sidebar.html.twig' %}
             <!-- Navbar -->
             <div class="main-panel">
-                {% include 'layout/navbar.html.twig' with { 'title': block('title') } only %}
+                {% include 'layout/navbar.html.twig' with { 'title': block('title'), 'totalItems': (block('totalItems') is defined ? block('totalItems') : ''), 'buttonTopRight': (block('buttonTopRight') is defined) ? block('buttonTopRight') : '' } %}
 
                 <!-- End Navbar -->
                 <div class="content">

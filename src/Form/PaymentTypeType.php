@@ -19,10 +19,12 @@ class PaymentTypeType extends AbstractType
                 'label' => 'paymentType.form.name',
                 'trim' => true,
                 'attr' => array('placeholder' => 'paymentType.form.placeholder.name', 'maxLength' => '30'),
+                'required' => true
             ))
             ->add('discount', NumberType::class, array(
                 'label' => 'paymentType.form.discount',
                 'attr' => array('placeholder' => 'paymentType.form.placeholder.discount', 'class' => 'float-mask', 'maxLength' => '100'),
+                'required' => false,
             ))
         ;
     }

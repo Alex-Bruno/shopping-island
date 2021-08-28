@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Deletar tipo de pagamento <strong>{{ entity.name }}</strong>{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
+                {% include 'layout/_blockButtons.html.twig' %}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -21,20 +21,20 @@ class PaymentType implements EntityInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", unique=true, length=100)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
+     * @Assert\Unique(message="payment_tyme.unique.name")
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\Column(type="float", precision=2)
-     * @Assert\NotBlank
      * @Assert\Type("float")
      */
-    private $discount;
+    private ?float $discount;
 
     /**
      * PaymentType constructor.
@@ -43,6 +43,7 @@ class PaymentType implements EntityInterface
     {
         $this->created = new \DateTime('now');
         $this->updated = new \DateTime('now');
+        $this->discount = 0;
     }
 
     /**
@@ -89,12 +90,12 @@ class PaymentType implements EntityInterface
     }
 
     /**
-     * @param float $discount
+     * @param ?float $discount
      * @return $this
      */
-    public function setDiscount(float $discount): self
+    public function setDiscount(?float $discount): self
     {
-        $this->discount = $discount;
+        $this->discount = (float) $discount;
 
         return $this;
     }

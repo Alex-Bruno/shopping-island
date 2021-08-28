@@ -3,6 +3,10 @@ paymentType:
     success: Tipo de pagamento salvo com sucesso.
     error: Houve um erro ao tentar salvar a forma de pagamento!
 
+  delete:
+    success: Tipo de pagamento deletado com sucesso.
+    error: Houve um erro ao tentar deletar a forma de pagamento!
+
   form:
     name: Nome
     discount: Desconto %

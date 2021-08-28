@@ -1,0 +1,3 @@
+paymentType:
+  unique:
+    name: Este tipo de pagamento já existe!

@@ -34,7 +34,7 @@ class PaymentTypeService implements ServiceInterface
      */
     public function search($filter = null): array
     {
-        return $this->entityManager->getRepository('App:PaymentType')->findAll();
+        return $this->entityManager->getRepository('App:PaymentType')->findBy(['enabled' => true], ['name' => 'ASC']);
     }
 
     /**
