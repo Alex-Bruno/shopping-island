@@ -50,7 +50,7 @@ class ExceptionHistory
 
     /**
      * @var string
-     * @ORM\Column(name="message", type="string")
+     * @ORM\Column(name="message", type="text")
      */
     protected string $message;
 

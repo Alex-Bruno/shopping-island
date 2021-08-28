@@ -35,7 +35,7 @@ class PaymentTypeController extends MyController
      * @return Response
      * @Route("/new", name="payment_type_new")
      */
-    public function new(Request $request, PaymentTypeService $service, ExceptionHistoryService $exceptionHistoryService): Response
+    public function new(Request $request, PaymentTypeService $service): Response
     {
         $entity = new PaymentType();
 
@@ -49,7 +49,7 @@ class PaymentTypeController extends MyController
                 $this->addSuccessMessage('paymentType.new.success');
             }catch (\Exception $exception) {
                 $this->addErrorMessage('paymentType.new.error');
-                $this->saveExceptionHistory($exception, $exceptionHistoryService);
+                $this->saveExceptionHistory($exception);
             }
 
             return $this->redirectToRoute('payment_type_index');

@@ -6,21 +6,22 @@ namespace App\Service;
 
 use App\Entity\ExceptionHistory;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ExceptionHistoryService
 {
     /**
-     * @var EntityManagerInterface
+     * @var ManagerRegistry
      */
-    protected EntityManagerInterface $entityManager;
+    protected ManagerRegistry $manager;
 
     /**
      * ExceptionHistoryService constructor.
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $manager)
     {
-        $this->entityManager = $entityManager;
+        $this->manager = $manager;
     }
 
     /**
@@ -29,6 +30,8 @@ class ExceptionHistoryService
      */
     public function save(\Exception $exception)
     {
+        $this->manager->getManager()->clear();
+
         $entity = new ExceptionHistory();
 
         $entity
@@ -38,22 +41,11 @@ class ExceptionHistoryService
             ->setMessage($exception->getMessage())
             ->setTrace($exception->getTraceAsString());
 
-        if (!$this->entityManager->isOpen()) {
-            $this->entityManager = $this->resetEntityManager();
+        if (!$this->manager->getManager()->isOpen()) {
+            $this->manager->resetManager();
         }
 
-        $this->entityManager->persist($entity);
-        $this->entityManager->flush();
-    }
-
-    /**
-     * @return mixed
-     */
-    private function resetEntityManager()
-    {
-        return $this->entityManager->create(
-            $this->entityManager->getConnection(),
-            $this->entityManager->getConfiguration()
-        );
+        $this->manager->getManager()->persist($entity);
+        $this->manager->getManager()->flush();
     }
 }

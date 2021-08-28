@@ -5,7 +5,6 @@ namespace App\Controller;
 
 
 use App\Service\ExceptionHistoryService;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -14,6 +13,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class MyController extends AbstractController
 {
+
+    /**
+     * @var ExceptionHistoryService
+     */
+    private ExceptionHistoryService $exceptionHistoryService;
+
+    /**
+     * MyController constructor.
+     * @param ExceptionHistoryService $exceptionHistoryService
+     */
+    public function __construct(ExceptionHistoryService $exceptionHistoryService)
+    {
+        $this->exceptionHistoryService = $exceptionHistoryService;
+    }
+
+
     /**
      * @param string $message
      */
@@ -42,8 +57,8 @@ class MyController extends AbstractController
      * @param \Exception $exception
      * @param ExceptionHistoryService $service
      */
-    protected function saveExceptionHistory(\Exception $exception, ?ExceptionHistoryService $service)
+    protected function saveExceptionHistory(\Exception $exception)
     {
-        $service->save($exception);
+        $this->exceptionHistoryService->save($exception);
     }
 }
