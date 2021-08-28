@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\EnabledTrait;
+use App\Entity\Traits\EntityTrait;
 use App\Interfaces\EntityInterface;
 use App\Repository\PaymentTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class PaymentType implements EntityInterface
 {
+    use EntityTrait, EnabledTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,33 +24,55 @@ class PaymentType implements EntityInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", unique=true, length=100)
      * @Assert\NotBlank
      */
     private $name;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", precision=2)
      * @Assert\NotBlank
      * @Assert\Type("float")
      */
     private $discount;
 
+    /**
+     * PaymentType constructor.
+     */
+    public function __construct()
+    {
+        $this->created = new \DateTime('now');
+        $this->updated = new \DateTime('now');
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return 'Tipo de pagamento';
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -54,11 +80,18 @@ class PaymentType implements EntityInterface
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getDiscount(): ?float
     {
         return $this->discount;
     }
 
+    /**
+     * @param float $discount
+     * @return $this
+     */
     public function setDiscount(float $discount): self
     {
         $this->discount = $discount;

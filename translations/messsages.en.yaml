@@ -1,7 +1,10 @@
 paymentType:
+  new:
+    success: Payment type saved successfully.
+    error: There was an error trying to save the payment type!
   form:
     name: Name
-    discount: Discount
+    discount: Discount %
     placeholder:
       name: Enter the payment type name
       discount: Enter discount for payment type

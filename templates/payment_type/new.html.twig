@@ -5,9 +5,7 @@
 {% block body %}
     <div class="card">
         <div class="card-body">
-            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                {{ form_widget(form) }}
-            {{ form_end(form) }}
+            {% include 'payment_type/_form.html.twig' %}
         </div>
     </div>
 {% endblock %}

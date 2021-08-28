@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use App\Entity\PaymentType;
+use App\Interfaces\EntityInterface;
 use App\Interfaces\ServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -14,8 +15,15 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class PaymentTypeService implements ServiceInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * PaymentTypeService constructor.
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -24,19 +32,28 @@ class PaymentTypeService implements ServiceInterface
     /**
      * @return PaymentType[]
      */
-    public function search()
+    public function search($filter = null): array
     {
         return $this->entityManager->getRepository('App:PaymentType')->findAll();
     }
 
-    public function save()
+    /**
+     * @param \App\Interfaces\EntityInterface $entity
+     */
+    public function save(EntityInterface $entity)
     {
-        // TODO: Implement save() method.
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
     }
 
-    public function delete()
+    /**
+     * @param \App\Interfaces\EntityInterface $entity
+     */
+    public function delete(EntityInterface $entity)
     {
-        // TODO: Implement delete() method.
+        $entity->setEnabled(false);
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
     }
 
 }

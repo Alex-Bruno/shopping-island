@@ -1,0 +1,9 @@
+<div class="form-actions">
+    <button type="submit" class="btn {{ button_css|default('btn-info btn-fw ') }} waves-effect">
+        {{ button_label|default('Salvar') }}
+    </button>
+
+    {% if include_back_to_home_link is not defined or include_back_to_home_link == true %}
+        <a href="{{ app.request.headers.get('referer') }}" class="btn btn-fw btn-default waves-effect">Cancelar</a>
+    {% endif %}
+</div>

@@ -1,0 +1,17 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-persist'}}) }}
+
+<div class="col-12">
+    <div class="form-group {% if form.name.vars.errors|length %} has-error {% endif %}">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+    </div>
+</div>
+<div class="col-12">
+    <div class="form-group {% if form.discount.vars.errors|length %} has-error {% endif %}">
+        {{ form_label(form.discount) }}
+        {{ form_widget(form.discount) }}
+    </div>
+</div>
+
+{% include 'layout/_blockButtons.html.twig' %}
+{{ form_end(form) }}

@@ -5,3 +5,7 @@ body {
 .mt-15p {
     margin-top: 15px;
 }
+
+.input-group-prepend {
+    margin-top: 8px;
+}

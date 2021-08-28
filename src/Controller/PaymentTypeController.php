@@ -4,16 +4,23 @@ namespace App\Controller;
 
 use App\Entity\PaymentType;
 use App\Form\PaymentTypeType;
+use App\Service\ExceptionHistoryService;
 use App\Service\PaymentTypeService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/payment-type')]
-class PaymentTypeController extends AbstractController
+/**
+ * @Route("/payment-type")
+ */
+class PaymentTypeController extends MyController
 {
-    #[Route('/', name: 'payment_type_index')]
+    /**
+     * @param Request $request
+     * @param PaymentTypeService $service
+     * @return Response
+     * @Route("/", name="payment_type_index")
+     */
     public function index(Request $request, PaymentTypeService $service): Response
     {
         return $this->render('payment_type/index.html.twig', [
@@ -22,8 +29,13 @@ class PaymentTypeController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'payment_type_new')]
-    public function new(Request $request, PaymentTypeService $service): Response
+    /**
+     * @param Request $request
+     * @param PaymentTypeService $service
+     * @return Response
+     * @Route("/new", name="payment_type_new")
+     */
+    public function new(Request $request, PaymentTypeService $service, ExceptionHistoryService $exceptionHistoryService): Response
     {
         $entity = new PaymentType();
 
@@ -32,6 +44,15 @@ class PaymentTypeController extends AbstractController
 
         if($form->isSubmitted() and $form->isValid()) {
 
+            try {
+                $service->save($entity);
+                $this->addSuccessMessage('paymentType.new.success');
+            }catch (\Exception $exception) {
+                $this->addErrorMessage('paymentType.new.error');
+                $this->saveExceptionHistory($exception, $exceptionHistoryService);
+            }
+
+            return $this->redirectToRoute('payment_type_index');
         }
 
         return $this->render('payment_type/new.html.twig', [

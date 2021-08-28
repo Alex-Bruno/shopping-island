@@ -6,9 +6,9 @@ namespace App\Interfaces;
 
 interface ServiceInterface
 {
-    public function search();
+    public function search($filter);
 
-    public function save();
+    public function save(EntityInterface $entity);
 
-    public function delete();
+    public function delete(EntityInterface $entity);
 }
