@@ -133,4 +133,5 @@ class PaymentTypeController extends MyController
             ->setMethod('DELETE')
             ->getForm();
     }
+
 }

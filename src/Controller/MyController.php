@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  * Class MyController
  * @package App\Controller
  */
-class MyController extends AbstractController
+abstract class MyController extends AbstractController
 {
 
     /**
