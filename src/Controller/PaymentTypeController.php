@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\PaymentType;
 use App\Form\PaymentTypeType;
-use App\Service\ExceptionHistoryService;
 use App\Service\PaymentTypeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
